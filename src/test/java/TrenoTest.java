@@ -9,7 +9,7 @@ import exception.*;
 public class TrenoTest {
 
 	public static void main(String[] args) {
-		testSenzaSpring();
+		testSpring();
 	}
 	
 	public static void testSenzaSpring() {
@@ -28,7 +28,7 @@ public class TrenoTest {
 		String siglaTrenord = "HPPRP";
 		String siglaFrecciaRossa = "HRPPP";
 		
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans/beans.xml");
 
 		try {
 			TrenoBuilder builderTN = (TrenoBuilder) context.getBean("tn");

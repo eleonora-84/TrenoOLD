@@ -7,8 +7,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.spr
  http://www.springframework.org/schema/util/spring-util.xsd"
 >
 
-<bean id="tn" class="treno.builder.TN.TNBuilder"></bean>
-<bean id="fr" class="treno.builder.FR.FRBuilder"></bean>
+<bean id="tn" class="builder.TN.TNBuilder"></bean>
+<bean id="fr" class="builder.FR.FRBuilder"></bean>
 
 
 
