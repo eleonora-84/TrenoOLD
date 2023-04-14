@@ -2,13 +2,15 @@ package vagoni;
 
 public class Locomotiva extends Vagone implements Carrozza, Motrice{
 
+	private int id;
 	private double massaTrainata;
-	private double peso;
+
+	public Locomotiva() {}
 	
-	public Locomotiva(double massaTrainata, double peso) {
+	public Locomotiva(double massaTrainata) {
 		super();
 		this.massaTrainata = massaTrainata;
-		this.peso = peso;
+
 	}
 
 	public double getMassaTrainata() {
@@ -16,7 +18,7 @@ public class Locomotiva extends Vagone implements Carrozza, Motrice{
 	}
 	
 	public double getPeso(){
-		return peso;
+		return super.getPeso();
 	}
 	
 	@Override
@@ -30,6 +32,12 @@ public class Locomotiva extends Vagone implements Carrozza, Motrice{
 		return 'H';
 	}
 
+	public int getId() {
+		return id;
+	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 }

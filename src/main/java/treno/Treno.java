@@ -6,10 +6,15 @@ import vagoni.Carrozza;
 import vagoni.Motrice;
 
 public class Treno {
+	
+	private int id;
+	
+	private Motrice motrice;
 
-	public Motrice motrice;
-	public List<Carrozza> listaVagoni;
+	private List<Carrozza> listaVagoni;
 
+	public Treno() {}
+	
 	public Treno(Motrice motrice, List<Carrozza> listaVagoni) {
 		super();
 		this.motrice = motrice;
@@ -27,7 +32,15 @@ public class Treno {
 	public Motrice getMotrice() {
 		return motrice;
 	}
+	
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String toString() {
 		return "Treno [" + motrice + ", lista vagoni: " + listaVagoni + "]";

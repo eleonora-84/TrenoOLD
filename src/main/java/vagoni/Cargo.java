@@ -2,11 +2,9 @@ package vagoni;
 
 public class Cargo extends Vagone implements Carrozza{
 	
-	private double peso;
 	
-	public Cargo(double peso) {
+	public Cargo() {
 		super();
-		this.peso = peso;
 	}
 
 

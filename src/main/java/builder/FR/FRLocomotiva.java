@@ -5,7 +5,8 @@ import vagoni.Locomotiva;
 public class FRLocomotiva extends Locomotiva {
 
 	public FRLocomotiva() {
-		super(1000, 20);
+		super(170);
+		super.setPeso(20);
 	}
 
 }

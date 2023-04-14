@@ -5,7 +5,8 @@ import vagoni.Cargo;
 public class TNCargo extends Cargo {
 
 	public TNCargo() {
-		super(40);
+		super();
+		super.setPeso(40);
 	}
 
 }

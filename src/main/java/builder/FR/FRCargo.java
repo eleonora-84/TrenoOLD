@@ -5,7 +5,8 @@ import vagoni.Cargo;
 public class FRCargo extends Cargo {
 
 	public FRCargo() {
-		super(50);
+		super();
+		super.setPeso(50);
 	}
 
 }

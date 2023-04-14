@@ -7,10 +7,10 @@ import exception.*;
 import vagoni.*;
 
 public abstract class TrenoBuilder {
-	public final Treno costruisci(String sigla) {
+	public final Treno costruisci(String siglaInput) {
 		
 		List<Carrozza> listaVagoni = new ArrayList();
-		
+		String sigla = siglaInput.toUpperCase();
 		if (sigla == null || sigla.length() < 1 )
 			throw new SiglaAssenteException();
 		
@@ -49,7 +49,7 @@ public abstract class TrenoBuilder {
 		Treno t = new Treno(m, listaVagoni);
 		
 		if (m.getMassaTrainata() < t.getPeso()) {
-			throw new PesoEccedenteException();
+			throw new PesoEccedenteException(t);
 		}
 		return t;
 	}
