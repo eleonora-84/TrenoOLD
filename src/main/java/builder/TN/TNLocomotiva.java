@@ -5,7 +5,7 @@ import vagoni.Locomotiva;
 public class TNLocomotiva extends Locomotiva {
 
 	public TNLocomotiva() {
-		super(100);
+		super(500);
 		super.setPeso(20);
 	}
 

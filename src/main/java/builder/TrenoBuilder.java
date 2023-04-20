@@ -1,15 +1,17 @@
 package builder;
 
 import java.util.List;
+
 import java.util.ArrayList;
 import treno.Treno;
 import exception.*;
 import vagoni.*;
 
 public abstract class TrenoBuilder {
+	
 	public final Treno costruisci(String siglaInput) {
-		
-		List<Carrozza> listaVagoni = new ArrayList();
+
+		List<Vagone> listaVagoni = new ArrayList<>();
 		String sigla = siglaInput.toUpperCase();
 		if (sigla == null || sigla.length() < 1 )
 			throw new SiglaAssenteException();
@@ -29,20 +31,27 @@ public abstract class TrenoBuilder {
 		if (sigla.indexOf('H') != 0 && sigla.indexOf('H') != sigla.length())
 			throw new VagoneFuoriPostoException(sigla, 'H', "La locomotiva può essere solo agli estremi del treno " + sigla.indexOf('H'));
 			
-		Motrice m = null;
+		Locomotiva m = null;
 		for(int i = 0; i<sigla.length(); i++) {
 			switch(sigla.charAt(i)) {
 				case('H'):
 					m = costruisciLocomotiva();
+				//	aggiungiMotrice(m);
 					break;
 				case('P'): 
-					listaVagoni.add(costruisciPasseggeri());
+					Vagone v1 = (Vagone) costruisciPasseggeri();
+					listaVagoni.add(v1);
+				//	aggiungiVagone(v1);
 					break;
 				case('R'): 
-					listaVagoni.add(costruisciRistorante());
+					Vagone v2 = (Vagone) costruisciRistorante();
+					listaVagoni.add(v2);
+				//	aggiungiVagone(v2);
 					break;
 				case('C'): 
-					listaVagoni.add(costruisciCargo());
+					Vagone v3 = (Vagone) costruisciCargo();
+					listaVagoni.add(v3);
+				//	aggiungiVagone(v3);
 					break;
 			}
 		}
@@ -55,11 +64,12 @@ public abstract class TrenoBuilder {
 	}
 
 	
-	protected abstract Motrice costruisciLocomotiva();
+	protected abstract Locomotiva costruisciLocomotiva();
 
 	protected abstract Carrozza costruisciPasseggeri();
 	
 	protected abstract Carrozza costruisciRistorante();
 
 	protected abstract Carrozza costruisciCargo();
+	
 }

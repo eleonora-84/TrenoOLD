@@ -1,10 +1,17 @@
+package test;
+
+import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import treno.*;
 import builder.*;
+import vagoni.*;
 import builder.FR.*;
 import builder.TN.*;
+import dao.TrenoDao;
+import daoImpl.*;
 import exception.*;
 
 public class TrenoTest {
@@ -13,15 +20,60 @@ public class TrenoTest {
 	
 	public static void main(String[] args) {		
 	
-		 testTNSenzaSpring();
+		// testTNSenzaSpring();
 		// testFRSenzaSpring();
 		// testTNSpring();
 		// testFRSpring();
+		 testHbn();
+		// testHbnLocomotiva();
+		// testHbnVagone();
+	}
+	
+	public static void testHbn() {
+//		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans/beans.xml");
+//		TrenoDaoImpl trenoDao = (TrenoDaoImpl) context.getBean("trenoDao");
+//		
+//		Treno trenoTN = (Treno) context.getBean("trenoTN");
+		
+		TrenoDao trenoDao = TrenoDaoImpl.getInstance();
+		Vagone v1 = new Passeggeri(50);
+		Vagone v2 = new Passeggeri(50);
+		Vagone v3 = new Passeggeri(50);
+		List<Vagone> listaVagoni = new ArrayList<Vagone>();
+		listaVagoni.add(v1);
+		System.out.println(listaVagoni);
+		listaVagoni.add(v2);
+		System.out.println(listaVagoni);
+		listaVagoni.add(v3);
+		System.out.println(listaVagoni);
+		
+		Treno trenoTN = new Treno(new Locomotiva(), listaVagoni);
+		
+		System.out.println(trenoTN);
+		trenoDao.add(trenoTN);
+	}
+	
+	public static void testHbnLocomotiva() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans/beans.xml");
+		LocomotivaDaoImpl locomotivaDao = (LocomotivaDaoImpl) context.getBean("locomotivaDao");
+		
+		locomotivaDao.add();		
+		locomotivaDao.get(1);
+	}
+	
+	public static void testHbnVagone() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans/beans.xml");
+		VagoneDaoImpl vagoneDao = (VagoneDaoImpl) context.getBean("vagoneDao");
+		Vagone v1 = new Passeggeri(100);
+		vagoneDao.add(v1);
+		
+		// vagoneDao.get(1);
+		
 	}
 	
 	public static void testTNSenzaSpring() {
 		
-		String siglaTrenord = "HRPPPPPP";
+		String siglaTrenord = "HRPPP";
 		
 		try {
 			TrenoBuilder builderTN = new TNBuilder();
@@ -79,13 +131,10 @@ public class TrenoTest {
 	
 	public static void testTNSpring() {
 		
-		String siglaTrenord = "HPPR";
-		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans/beans.xml");
 
 		try {
-			TrenoBuilder builderTN = (TrenoBuilder) context.getBean("tn");
-			Treno trenoTN = builderTN.costruisci(siglaTrenord);
+			Treno trenoTN = (Treno) context.getBean("trenoTN");
 			System.out.println(trenoTN);
 		}
 		catch(SiglaAssenteException e) {
@@ -97,9 +146,9 @@ public class TrenoTest {
 		}
 		catch(VagoniIncompatibiliException e) {
 			System.out.println(e.getMessage());
-			String nuovaSigla = siglaTrenord.substring(0 , siglaTrenord.lastIndexOf(e.getVagone2()))
-					+ siglaTrenord.substring(siglaTrenord.lastIndexOf(e.getVagone2()) + 1, siglaTrenord.length());
-			System.out.println("\nSi suggerisce di rimuovere un vagone e di usare questa sigla " + nuovaSigla + "\n");
+			// String nuovaSigla =  substring(0 , siglaTrenord.lastIndexOf(e.getVagone2()))
+			//		+ siglaTrenord.substring(siglaTrenord.lastIndexOf(e.getVagone2()) + 1, siglaTrenord.length());
+			// System.out.println("\nSi suggerisce di rimuovere un vagone e di usare questa sigla " + nuovaSigla + "\n");
 		}
 		
 		catch(PesoEccedenteException e) {
@@ -111,13 +160,11 @@ public class TrenoTest {
 	
 	public static void testFRSpring() {
 		
-		String siglaFrecciaRossa = "HRPPPP";
-		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans/beans.xml");
-		
+
 		try {
-			TrenoBuilder builderFR = (TrenoBuilder) context.getBean("fr");
-			System.out.println(builderFR.costruisci(siglaFrecciaRossa));
+			Treno trenoFR = (Treno) context.getBean("trenoFR");
+			System.out.println(trenoFR);
 		}
 		catch(SiglaAssenteException e) {
 			e.printStackTrace();
@@ -128,9 +175,9 @@ public class TrenoTest {
 		}
 		catch(VagoniIncompatibiliException e) {
 			System.out.println(e.getMessage());
-			String nuovaSigla = siglaFrecciaRossa.substring(0 , siglaFrecciaRossa.lastIndexOf(e.getVagone2()))
-					+ siglaFrecciaRossa.substring(siglaFrecciaRossa.lastIndexOf(e.getVagone2()) + 1, siglaFrecciaRossa.length());
-			System.out.println("\nSi suggerisce di rimuovere un vagone e di usare questa sigla " + nuovaSigla + "\n");
+			// String nuovaSigla = siglaFrecciaRossa.substring(0 , siglaFrecciaRossa.lastIndexOf(e.getVagone2()))
+			//		+ siglaFrecciaRossa.substring(siglaFrecciaRossa.lastIndexOf(e.getVagone2()) + 1, siglaFrecciaRossa.length());
+			// System.out.println("\nSi suggerisce di rimuovere un vagone e di usare questa sigla " + nuovaSigla + "\n");
 		}
 		
 		catch(PesoEccedenteException e) {

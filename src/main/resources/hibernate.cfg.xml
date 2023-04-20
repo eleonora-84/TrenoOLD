@@ -6,7 +6,7 @@
    
       <property name = "hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
       
-      <property name = "hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+      <property name = "hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 
       <property name = "hibernate.connection.url">jdbc:mysql://localhost/fabbrica_treno</property>
       
@@ -16,11 +16,11 @@
       
       <property name = "hibernate.show_sql">true</property>
       
-      <!-- List of XML mapping files -->
+      <!-- List of XML mapping files  -->
       <mapping resource = "Treno.hbm.xml"/>
       <mapping resource = "Locomotiva.hbm.xml"/>
       <mapping resource = "Vagone.hbm.xml"/>      
-   
+
    </session-factory>
 
 </hibernate-configuration>

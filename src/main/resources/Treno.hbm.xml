@@ -11,13 +11,14 @@
       </meta>
       
       <id name = "id" type = "int" column = "id">
-         <generator class="native"/>
+         <generator class="increment"/>
       </id>
       
-      <property name = "motrice" column = "motrice_id" type="int"/>
+      <many-to-one name = "locomotiva" column = "locomotiva_id" class="vagoni.Locomotiva" unique="true"/>
+      
       <list name = "listaVagoni" cascade="all">
-         <key column = "vagoni_id"/>
-         <list-index column = "vagone_id"/> <!-- mi serve per l'ordinamento della lista -->
+         <key column = "treno_id"/>
+         <index column = "id"/> <!-- mi serve per l'ordinamento della lista-->
          <one-to-many class="vagoni.Vagone"/>
       </list>
    </class>

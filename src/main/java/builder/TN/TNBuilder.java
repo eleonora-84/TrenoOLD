@@ -2,13 +2,14 @@ package builder.TN;
 
 import builder.TrenoBuilder;
 import vagoni.Carrozza;
+import vagoni.Locomotiva;
 import vagoni.Motrice;
 import vagoni.Vagone;
 
 public class TNBuilder extends TrenoBuilder {
 
 	@Override
-	protected Motrice costruisciLocomotiva() {
+	protected Locomotiva costruisciLocomotiva() {
 		return new TNLocomotiva();
 	}
 

@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util" xsi:schemaLocation="
- http://www.springframework.org/schema/beans
- http://www.springframework.org/schema/beans/spring-beans.xsd
- http://www.springframework.org/schema/util
- http://www.springframework.org/schema/util/spring-util.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
 >
 
-<bean id="tn" class="builder.TN.TNBuilder"></bean>
-<bean id="fr" class="builder.FR.FRBuilder"></bean>
+	<bean id="tn" class="builder.TN.TNBuilder"></bean>
 
+	<bean id="trenoTN" factory-bean="tn" factory-method="costruisci">
+		<constructor-arg name="siglaInput" value="HCCCC" type="String"></constructor-arg>
+	</bean>
 
+	<bean id="fr" class="builder.FR.FRBuilder"></bean>
+
+	<bean id="trenoFR" factory-bean="fr" factory-method="costruisci">
+		<constructor-arg name="siglaInput" value="HRPPP" type="String"></constructor-arg>
+	</bean>
+
+	<bean id="trenoDao" class="daoImpl.TrenoDaoImpl"
+		factory-method="getInstance"></bean>
+
+	<bean id="locomotivaDao" class="daoImpl.LocomotivaDaoImpl"
+		factory-method="getInstance"></bean>
+
+	<bean id="locomotivaTNDao" class="daoImpl.LocomotivaTNDaoImpl"
+		factory-method="getInstance"></bean>
+
+	<bean id="vagoneDao" class="daoImpl.VagoneDaoImpl"
+		factory-method="getInstance"></bean>
 
 </beans>

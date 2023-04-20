@@ -1,3 +1,4 @@
+package test;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
@@ -7,10 +8,8 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import builder.TrenoBuilder;
-import builder.FR.FRBuilder;
-import builder.TN.TNBuilder;
 import treno.Treno;
 
 public class ManageTrain {
@@ -21,42 +20,43 @@ public class ManageTrain {
 		
 		try {
 			factory = new Configuration().configure().buildSessionFactory();
+			System.out.println("Factory creata");
 		} catch (Throwable ex) {
 			System.err.println("Failed to create sessionFactory object." + ex);
+			System.out.println("Sono nell'eccezione.");
 		} 
+		
+		
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans/beans.xml");
 		
 		ManageTrain MT = new ManageTrain();
 		
-		String siglaTrenord = "HRPPP";
-		TrenoBuilder builderTN = new TNBuilder();
-		Treno trenoTN = builderTN.costruisci(siglaTrenord);
+		Treno trenoTN = (Treno) context.getBean("trenoTN");
+		System.out.println(trenoTN);
 
-		String siglaFrecciaRossa = "HRPPP";
-		TrenoBuilder builderFR = new FRBuilder();
-		Treno trenoFR = builderFR.costruisci(siglaFrecciaRossa);
-		
-		MT.aggiungiTreno(siglaFrecciaRossa, builderFR);
-		MT.aggiungiTreno(siglaTrenord, builderTN);
+		Treno trenoFR = (Treno) context.getBean("trenoFR");
+		System.out.println(trenoFR);
+
+		MT.aggiungiTreno(trenoTN);
+		MT.aggiungiTreno(trenoFR);
 		
 		MT.listaTreni();
-		
-
-		
+				
 	}
 	
 	/* CREATE */
-	public Integer aggiungiTreno(String sigla, TrenoBuilder trenoBuilder) {
+	public Integer aggiungiTreno(Treno t) {
 		Session session = factory.openSession();
 		Transaction tx = null;
 		Integer trenoID = null;
 		try {
 			tx = session.beginTransaction();
-			Treno treno = trenoBuilder.costruisci(sigla);
-			trenoID = (Integer) session.save(treno);
+			trenoID = (Integer) session.save(t);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null) tx.rollback();
 			e.printStackTrace();
+			System.out.println("Eccezione nel metodo aggiungiTreno");
 		} finally {
 			session.close();
 		}
@@ -81,6 +81,7 @@ public class ManageTrain {
 		} catch(HibernateException e) {
 			if (tx != null) tx.rollback();
 			e.printStackTrace();
+			System.out.println("Eccezione nel metodo listaTreni");
 		} finally {
 			session.close();
 		}

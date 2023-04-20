@@ -1,9 +1,22 @@
 package vagoni;
 
+import treno.Treno;
+
 public abstract class Vagone implements Carrozza{
-	
+
 	private int id;
+
 	private double peso;
+
+	private Treno treno;
+
+	public Treno getTreno() {
+		return treno;
+	}
+	
+	public void setTreno(Treno treno) {
+		this.treno = treno;
+	}
 
 	public Vagone() {
 		super();
@@ -15,7 +28,7 @@ public abstract class Vagone implements Carrozza{
 	}
 	
 	public char getTipo() {
-		return this.getClass().getSimpleName().charAt(2);
+		return this.getClass().getSimpleName().charAt(0);
 	}
 	
 	public double getPeso() {

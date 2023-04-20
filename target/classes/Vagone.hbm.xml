@@ -11,10 +11,11 @@
       </meta>
       
       <id name = "id" type = "int" column = "id">
-         <generator class="native"/>
+         <generator class="increment"/>
       </id>
       
       <property name = "peso" column = "peso" type="double"/>
+      <many-to-one name="treno" column="treno_id"></many-to-one>
       
    </class>
 </hibernate-mapping>

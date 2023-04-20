@@ -1,9 +1,14 @@
 package vagoni;
 
+import treno.Treno;
+
 public class Locomotiva extends Vagone implements Carrozza, Motrice{
 
 	private int id;
+	
 	private double massaTrainata;
+
+
 
 	public Locomotiva() {}
 	
@@ -12,7 +17,20 @@ public class Locomotiva extends Vagone implements Carrozza, Motrice{
 		this.massaTrainata = massaTrainata;
 
 	}
+	
+	public void setMassaTrainata(double massaTrainata) {
+		this.massaTrainata = massaTrainata;
+	}
 
+	public void setTreno(Treno treno) {
+		this.treno = treno;
+	}
+
+	private Treno treno;
+	
+	public Treno getTreno() {
+		return treno;
+	}
 	public double getMassaTrainata() {
 		return massaTrainata;
 	}
