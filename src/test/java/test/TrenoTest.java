@@ -20,13 +20,12 @@ public class TrenoTest {
 	
 	public static void main(String[] args) {		
 	
-		// testTNSenzaSpring();
+		 testTNSenzaSpring();
 		// testFRSenzaSpring();
 		// testTNSpring();
 		// testFRSpring();
-		 testHbn();
-		// testHbnLocomotiva();
-		// testHbnVagone();
+		// testHbn();
+
 	}
 	
 	public static void testHbn() {
@@ -48,27 +47,7 @@ public class TrenoTest {
 		System.out.println(listaVagoni);
 		
 		Treno trenoTN = new Treno(new Locomotiva(), listaVagoni);
-		
-		System.out.println(trenoTN);
 		trenoDao.add(trenoTN);
-	}
-	
-	public static void testHbnLocomotiva() {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans/beans.xml");
-		LocomotivaDaoImpl locomotivaDao = (LocomotivaDaoImpl) context.getBean("locomotivaDao");
-		
-		locomotivaDao.add();		
-		locomotivaDao.get(1);
-	}
-	
-	public static void testHbnVagone() {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans/beans.xml");
-		VagoneDaoImpl vagoneDao = (VagoneDaoImpl) context.getBean("vagoneDao");
-		Vagone v1 = new Passeggeri(100);
-		vagoneDao.add(v1);
-		
-		// vagoneDao.get(1);
-		
 	}
 	
 	public static void testTNSenzaSpring() {
@@ -79,6 +58,11 @@ public class TrenoTest {
 			TrenoBuilder builderTN = new TNBuilder();
 			Treno trenoTN = builderTN.costruisci(siglaTrenord);
 			System.out.println(trenoTN);
+			
+			TrenoDao trenoDao = TrenoDaoImpl.getInstance();
+			trenoDao.add(trenoTN);
+			System.out.println(trenoTN);
+
 		}
 		catch(SiglaAssenteException e) {
 			e.printStackTrace();

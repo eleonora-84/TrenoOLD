@@ -22,15 +22,7 @@ public class Locomotiva extends Vagone implements Carrozza, Motrice{
 		this.massaTrainata = massaTrainata;
 	}
 
-	public void setTreno(Treno treno) {
-		this.treno = treno;
-	}
 
-	private Treno treno;
-	
-	public Treno getTreno() {
-		return treno;
-	}
 	public double getMassaTrainata() {
 		return massaTrainata;
 	}
