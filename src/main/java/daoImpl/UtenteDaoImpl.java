@@ -9,8 +9,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.springframework.ui.Model;
+
 import dao.UtenteDao;
 import dto.UtenteDTO;
+import exception.UtenteGiaRegistratoException;
 
 public class UtenteDaoImpl implements UtenteDao {
 	private static UtenteDaoImpl instance = null;
@@ -32,7 +35,9 @@ public class UtenteDaoImpl implements UtenteDao {
 		EntityManager entitymanager = emFactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		
-		entitymanager.persist(new UtenteDTO(username, password));
+		if(findByUsername(username)==null)
+			entitymanager.persist(new UtenteDTO(username, password));
+			else throw new UtenteGiaRegistratoException("Utente già registrato");
 		
 		entitymanager.getTransaction().commit();
 		entitymanager.close();

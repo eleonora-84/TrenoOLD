@@ -64,8 +64,8 @@ public class TestJPA {
 		
 		UtenteDao utenteDao = UtenteDaoImpl.getInstance();
 		
-		utenteDao.add(utente);
-		utenteDao.add(utente2);
+		utenteDao.add("provaConTreno", "provaConTreno");
+		utenteDao.add("provaConTreno2", "provaConTreno2");
 		
 		trenoDao.add(trenoTN, utente);
 		trenoDao.add(trenoTN2, utente);

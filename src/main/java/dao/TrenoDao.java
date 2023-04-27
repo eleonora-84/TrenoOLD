@@ -10,5 +10,5 @@ public interface TrenoDao{
 	public TrenoDTO add(Treno treno, UtenteDTO utente);
 	public Treno updateTreno(Treno treno);
 	public void deleteTreno();
-	public List<Treno> listaTreni();
+	public List<TrenoDTO> listaTreni();
 }
