@@ -1,4 +1,4 @@
-package treno.exception;
+package exception;
 
 public class SiglaAssenteException extends RuntimeException {
 	public SiglaAssenteException() {

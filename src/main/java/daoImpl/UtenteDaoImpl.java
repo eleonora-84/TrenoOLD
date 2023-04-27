@@ -26,19 +26,17 @@ public class UtenteDaoImpl implements UtenteDao {
 	
 
 	@Override
-	public UtenteDTO add(String username, String password) {
+	public void add(String username, String password) {
 		
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
 		EntityManager entitymanager = emFactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		
-		UtenteDTO utenteDto = new UtenteDTO(username, password);
-		entitymanager.persist(utenteDto);
+		entitymanager.persist(new UtenteDTO(username, password));
 		
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		emFactory.close();
-		return utenteDto;
 	}
 	
 	@Override

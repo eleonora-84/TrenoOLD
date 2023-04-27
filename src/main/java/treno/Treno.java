@@ -12,7 +12,7 @@ public class Treno {
 
 	private Locomotiva locomotiva;
 
-	private List<Vagone> listaVagoni;
+	private List<Vagone> listaVagoni = new ArrayList<>();
 
 	public Treno() {}
 	
@@ -26,10 +26,10 @@ public class Treno {
 		
 		List<String> listaString = new ArrayList<>();
 		
-		System.out.println();
-		if (this.locomotiva != null) {
+		//System.out.println();
+		//if (locomotiva != null) {
 			listaString.add("H");
-		}
+		//}
 		
 		for (Vagone v : this.listaVagoni) {
 			switch(v.getTipo()) {
@@ -54,9 +54,12 @@ public class Treno {
 		return lista;
 	}
 	
+	public void aggiungiVagone(Vagone v) {
+		this.listaVagoni.add(v);
+	}
 	
 	public double getPeso() {
-		double peso = locomotiva.getPeso();
+		double peso = this.locomotiva.getPeso();
 		for (Carrozza v : listaVagoni) {
 			peso += v.getPeso();
 		}

@@ -2,6 +2,7 @@ package builder.FR;
 
 import builder.TrenoBuilder;
 import vagoni.Carrozza;
+import vagoni.Vagone;
 
 public class FRBuilder extends TrenoBuilder {
 
@@ -11,17 +12,17 @@ public class FRBuilder extends TrenoBuilder {
 	}
 
 	@Override
-	protected Carrozza costruisciPasseggeri() {
+	protected Vagone costruisciPasseggeri() {
 		return new FRPasseggeri();
 	}
 
 	@Override
-	protected Carrozza costruisciRistorante() {
+	protected Vagone costruisciRistorante() {
 		return new FRRistorante();
 	}
 
 	@Override
-	protected Carrozza costruisciCargo() {
+	protected Vagone costruisciCargo() {
 		return new FRCargo();
 	}
 

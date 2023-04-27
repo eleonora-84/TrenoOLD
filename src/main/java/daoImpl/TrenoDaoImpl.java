@@ -2,6 +2,9 @@ package daoImpl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import dao.*;
 import treno.Treno;
@@ -21,10 +24,18 @@ public class TrenoDaoImpl implements TrenoDao {
 	}
 	
 	@Override
-	public TrenoDTO add(Treno treno) {
-
-		TrenoDTO trenoDTO = new TrenoDTO(treno.getSigla(), treno.getPeso());
-
+	public TrenoDTO add(Treno treno, UtenteDTO utente) {
+		
+		TrenoDTO trenoDTO = new TrenoDTO(treno.getSigla(), 0, utente); // treno.getPeso() 
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+		EntityManager entitymanager = emFactory.createEntityManager();
+		entitymanager.getTransaction().begin();
+		
+		entitymanager.persist(trenoDTO);
+		
+		entitymanager.getTransaction().commit();
+		entitymanager.close();
+		emFactory.close();
 
 		return trenoDTO;
 	}

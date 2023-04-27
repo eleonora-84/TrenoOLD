@@ -1,4 +1,4 @@
-package treno.exception;
+package exception;
 
 public class Errori {
 	private RuntimeException vi;
@@ -60,7 +60,7 @@ public class Errori {
 		if (sigla.indexOf('R') == 0 | sigla.indexOf('R') == sigla.length()-1)
 			return ((VagoniFuoriPostoException) vi).siglaSuggerita();
 		if (sigla.indexOf('R') != sigla.lastIndexOf("R"))
-		return ((VagoniIncompatibiliException) vi).siglaSuggerita();
+			return ((VagoniIncompatibiliException) vi).siglaSuggerita();
 		if ((sigla.indexOf('C') >= 0 && sigla.indexOf('P') >= 0) || (sigla.indexOf('C') >= 0 && sigla.indexOf('R') >= 0) )
 			return ((VagoniIncompatibili2Exception) vi).siglaSuggerita();
 		return null;

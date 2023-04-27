@@ -1,4 +1,4 @@
-package treno.exception;
+package exception;
 
 public class VagoniFuoriPostoException extends RuntimeException {
 	private String sigla;

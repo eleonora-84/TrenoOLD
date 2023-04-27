@@ -1,4 +1,4 @@
-package treno.exception;
+package exception;
 
 public class VagoniIncompatibiliException extends RuntimeException{
 	private String sigla;
