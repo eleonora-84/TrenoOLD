@@ -7,21 +7,40 @@ import javax.persistence.Persistence;
 
 import builder.TrenoBuilder;
 import builder.TN.TNBuilder;
-import dao.TrenoDao;
-import daoImpl.TrenoDaoImpl;
+import dao.*;
+import daoImpl.*;
 import treno.Treno;
 import dto.*;
 
 public class TestJPA {
 
 	public static void main(String[] args) {
-		creaTreno();
+		// creaTreno();
+		utenti();
 	}
-	
-	public static void creaTreno() {
-		System.out.println("Test 01");
+
+	public static void utenti() {
+		System.out.println("Test utenti");
 		
-	
+		
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+		EntityManager entitymanager = emFactory.createEntityManager();
+		entitymanager.getTransaction().begin();
+		
+		UtenteDao utenteDao = UtenteDaoImpl.getInstance();
+		
+//		System.out.println(utenteDao.findByID(1));
+		System.out.println("Trova utente by user " + utenteDao.findByUsername("user"));
+		System.out.println("Trova utente by psw " + utenteDao.findByPassword("psw1"));
+		
+		
+		entitymanager.getTransaction().commit();
+		entitymanager.close();
+		emFactory.close();
+	}
+
+	public static void creaTreno() {
+		System.out.println("Test treno");
 		
 		String siglaTrenord = "HCCCCC";
 		
@@ -33,7 +52,7 @@ public class TestJPA {
 		Treno trenoTN4 = builderTN.costruisci("HCCCC");
 		
 		TrenoDao trenoDao = TrenoDaoImpl.getInstance();
-		
+
 		trenoDao.add(trenoTN);
 		trenoDao.add(trenoTN2);
 		trenoDao.add(trenoTN3);
@@ -49,14 +68,11 @@ public class TestJPA {
 		entitymanager.persist(trenoDao.add(trenoTN3));
 		entitymanager.persist(trenoDao.add(trenoTN4));
 		
+		entitymanager.persist(new UtenteDTO("username1", "provaPassword111"));
 		
 		TrenoDTO trenoID2 = entitymanager.find(TrenoDTO.class, 9);
 		
 		System.out.println(trenoID2);
-		
-		entitymanager.getTransaction().commit();
-		entitymanager.close();
-		emFactory.close();
 		
 	}
 

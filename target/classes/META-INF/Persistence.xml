@@ -8,6 +8,7 @@
    <persistence-unit name="Eclipselink_JPA" transaction-type="RESOURCE_LOCAL">
    
       <class>.Treno.src.main.java.dto.TrenoDTO</class>
+      <class>.Treno.src.main.java.dto.UtenteDTO</class>
 
       <properties>
          <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/treno_test01"/>
