@@ -5,8 +5,8 @@ public class VagoniIncompatibiliException extends RuntimeException{
 	private char vagone1;
 	private char vagone2;
 	private String nuovasigla=sigla;
-	public VagoniIncompatibiliException(String message, String sigla, char vagone1, char vagone2) {
-		super(message + ": Errore nella costruzione del treno con sigla "+ sigla + " trovati due vagoni incompatibili di tipo " + vagone1 + ","
+	public VagoniIncompatibiliException(String message, String sigla, char vagone1, char vagone2, String siglaSuggerita) {
+		super(message + ": Errore nella costruzione del treno con sigla "+ sigla + " trovati due vagoni incompatibili di tipo " + vagone1 + "--Sigla consigliata= "+siglaSuggerita+","
 	+ vagone2 + " \nSigla suggerita:");
 		this.vagone1 = vagone1;
 		this.vagone2 = vagone2;

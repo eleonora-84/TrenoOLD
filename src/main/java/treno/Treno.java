@@ -1,6 +1,7 @@
 package treno;
 
 import java.util.List;
+
 import java.util.ArrayList;
 
 import vagoni.Carrozza;
@@ -12,7 +13,7 @@ public class Treno {
 
 	private Locomotiva locomotiva;
 
-	private List<Vagone> listaVagoni = new ArrayList<>();
+	private List<Vagone> listaVagoni = new ArrayList<Vagone>();
 
 	public Treno() {}
 	
@@ -24,7 +25,7 @@ public class Treno {
 	
 	public String getSigla() {
 		
-		List<String> listaString = new ArrayList<>();
+		List<String> listaString = new ArrayList<String>();
 		
 		//System.out.println();
 		//if (locomotiva != null) {

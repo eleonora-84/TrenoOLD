@@ -2,6 +2,7 @@ package daoImpl;
 
 import java.util.List;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,7 +14,7 @@ import dao.*;
 import treno.Treno;
 import dto.*;
 
-public class TrenoDaoImpl implements TrenoDao {
+public class TrenoDaoImpl implements TrenoDao{
 	
 	private static TrenoDaoImpl instance = null;
 	
@@ -26,7 +27,6 @@ public class TrenoDaoImpl implements TrenoDao {
 		else return instance;
 	}
 	
-	@Override
 	public TrenoDTO add(Treno treno, UtenteDTO utente) {
 		
 		TrenoDTO trenoDTO = new TrenoDTO(treno.getSigla(), 0, utente); // treno.getPeso() 
@@ -43,19 +43,18 @@ public class TrenoDaoImpl implements TrenoDao {
 		return trenoDTO;
 	}
 
-	@Override
 	public Treno updateTreno(Treno treno) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void deleteTreno() {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
-	@Override
 	public List<TrenoDTO> listaTreni() {
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
 		EntityManager entitymanager = emFactory.createEntityManager();
@@ -67,7 +66,7 @@ public class TrenoDaoImpl implements TrenoDao {
 
 	    Root<TrenoDTO> variableRoot = query.from(TrenoDTO.class);
 	    query.select(variableRoot);
-	    System.out.println(entitymanager.createQuery(query).getResultList());
+	    System.out.println(entitymanager.createQuery(query).getResultList() + "Sono nella lista treni");
 		return entitymanager.createQuery(query).getResultList();
 	}
 

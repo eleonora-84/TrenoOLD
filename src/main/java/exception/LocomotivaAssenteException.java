@@ -12,6 +12,6 @@ public class LocomotivaAssenteException extends RuntimeException {
 			sigla = nuovasigla;
 		}
 		return ("H" + sigla);
-	};
+	}
 	
 }

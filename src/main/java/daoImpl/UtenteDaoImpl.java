@@ -28,7 +28,6 @@ public class UtenteDaoImpl implements UtenteDao {
 	}
 	
 
-	@Override
 	public void add(String username, String password) {
 		
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
@@ -44,7 +43,6 @@ public class UtenteDaoImpl implements UtenteDao {
 		emFactory.close();
 	}
 	
-	@Override
 	public UtenteDTO findByID(int id) {
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
 		EntityManager entitymanager = emFactory.createEntityManager();
@@ -59,7 +57,6 @@ public class UtenteDaoImpl implements UtenteDao {
 		return utenteDto;
 	}
 	
-	@Override
 	public UtenteDTO findByUsername(String username) {
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
 		EntityManager entitymanager = emFactory.createEntityManager();
@@ -71,16 +68,31 @@ public class UtenteDaoImpl implements UtenteDao {
 	    
 	    for (UtenteDTO u : listaUtentiDTO) {
 	    	if (u.getUsername().equals(username)) {
-	    		utenteFinal.setId(u.getId());
-	    		utenteFinal.setUsername(u.getUsername());
-	    		utenteFinal.setPassword(u.getPassword());
-	    		return utenteFinal;
+
+	    		return u;
+	    	}
+	    } return null;
+	    
+	}
+	
+	public UtenteDTO findByUsernameEPassword(String username, String password) {
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+		EntityManager entitymanager = emFactory.createEntityManager();
+		entitymanager.getTransaction().begin();
+		
+	    List<UtenteDTO> listaUtentiDTO = listaUtenti();
+    
+	    UtenteDTO utenteFinal = new UtenteDTO();
+	    
+	    for (UtenteDTO u : listaUtentiDTO) {
+	    	if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+	    		
+	    		return u;
 	    	}
 	    } return null;
 	    
 	}
 
-	@Override
 	public UtenteDTO findByPassword(String password) {
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
 		EntityManager entitymanager = emFactory.createEntityManager();
@@ -92,28 +104,23 @@ public class UtenteDaoImpl implements UtenteDao {
 	    
 	    for (UtenteDTO u : listaUtentiDTO) {
 	    	if (u.getPassword().equals(password)) {
-	    		utenteFinal.setId(u.getId());
-	    		utenteFinal.setUsername(u.getUsername());
-	    		utenteFinal.setPassword(u.getPassword());
+
     		
-	    		return utenteFinal;
+	    		return u;
 	    	}
 	    } return null;
 	    
 	}
-	@Override
 	public UtenteDTO updateUtente(UtenteDTO utente) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void deleteUtente() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public List<UtenteDTO> listaUtenti() {
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
 		EntityManager entitymanager = emFactory.createEntityManager();
@@ -128,5 +135,7 @@ public class UtenteDaoImpl implements UtenteDao {
 
 		return entitymanager.createQuery(query).getResultList();
 	}
+	
+	
 
 }

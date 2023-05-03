@@ -19,7 +19,7 @@ public abstract class TrenoBuilder {
 //			e1 = new Errori(sigla);
 //		}	
 //		sigla= nuovaSigla;
-		if (e1.siglaSuggerita(sigla) == null) {
+		if (e1.siglaSuggerita(sigla) == sigla) {
 			Treno t = new Treno();
 			for (int i = 0; i < sigla.length(); i++) {
 				Vagone v;
